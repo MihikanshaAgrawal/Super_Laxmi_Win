@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-body">
+
+  <h1 style="color:red">ADMIN TEST PAGE</h1>
+
+  <div class="admin-card">
+    <h1>🔐 Admin Panel</h1>
+    <p>Manage Slot Results</p>
+
+    <input type="date" id="admin-date">
+
+    <!-- 12-hour slot dropdown -->
+    <select id="admin-time">
+    </select>
+
+    <input
+      type="number"
+      id="admin-number"
+      min="0"
+      max="99"
+      placeholder="Enter Result (00-99)"
+    >
+
+    <button id="save-result">
+      💾 Save Result
+    </button>
+  </div>
+
+  <script src="admin.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>🎰 Super Laxmi Win | Lucky Number Result</title>
+    <meta name="description" content="Daily Lucky Number Result - Super Laxmi Win">
+    <meta name="theme-color" content="#5b2cff">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.png">
+</head>
+
+<body>
+
+    <!--================ HEADER ================-->
+
+    <header class="header">
+
+        <div class="logo-area">
+            <h1>🎰 Super Laxmi Win</h1>
+            <p>Daily Lucky Number Result</p>
+        </div>
+
+    </header>
+
+    <!--================ LIVE DATE BAR ================-->
+
+    <section class="date-bar">
+
+        <div id="dateContent" class="date-content">
+
+            Loading Date...
+
+        </div>
+
+    </section>
+
+    <!--================ MAIN SECTION ================-->
+
+    <main class="main-container">
+
+        <!--========== CALENDAR ==========-->
+
+        <section class="calendar-container">
+
+            <div class="calendar-header">
+
+                <button id="prevMonth">
+
+                    ◀
+
+                </button>
+
+                <h2 id="monthYear">
+
+                    June 2025
+
+                </h2>
+
+                <button id="nextMonth">
+
+                    ▶
+
+                </button>
+
+            </div>
+
+            <div id="calendar" class="calendar"></div>
+
+        </section>
+
+        <!--========== SLOT SECTION ==========-->
+
+        <section class="slots-section">
+
+            <div class="slot-top">
+
+                <h2 id="selectedDateTitle">
+
+                    🎯 Today's Lucky Slots
+
+                </h2>
+
+            </div>
+
+            <div id="slotsContainer" class="slots-container">
+
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!--================ RESULT NOTICE ================-->
+
+    <section class="notice-box">
+
+        <div class="ticker">
+            <span>
+                🎉 Welcome • Every 20 Minutes New Lucky Result • Best of Luck 🍀
+            </span>
+        </div>
+
+    </section>
+
+    <!--================ ADMIN PANEL ================-->
+
+    <section id="admin-panel">
+
+        <h2>
+
+            🔐 Admin Control Panel
+
+        </h2>
+
+        <div class="admin-box">
+
+            <label>
+
+                Select Date
+
+            </label>
+
+            <input type="date" id="admin-date">
+
+            <label>
+
+                Select Time
+
+            </label>
+
+            <input type="time" id="admin-time">
+
+            <label>
+
+                Lucky Number (00-99)
+
+            </label>
+
+            <input type="number" id="admin-number" min="0" max="99" placeholder="Enter Number">
+
+            <button id="save-result">
+
+                💾 Save Result
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!--================ FOOTER ================-->
+
+    <footer class="footer">
+
+        <div>
+
+            © 2026 Super Laxmi Win
+
+        </div>
+
+        <div>
+
+            Designed with ❤️
+
+        </div>
+
+    </footer>
+
+    <!--================ SCRIPT ================-->
+
+    <script src="script.js"></script>
+
+</body>
+
+
+
+</html>

@@ -1,0 +1,446 @@
+/* 🌈 Base Setup */
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  background: radial-gradient(circle at top, #7c4dff, #4527a0, #1a237e);
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* 🔹 Header */
+.header {
+  text-align: center;
+  background: linear-gradient(90deg, #1de9b6, #00bfa5);
+  width: 100%;
+  padding: 18px 0;
+  color: #fff;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+}
+
+/* 🔸 Floating Date Bar */
+.date-bar {
+  width: 100%;
+  background: linear-gradient(90deg, #ff9800, #e91e63);
+  color: #fff;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  font-weight: 600;
+  font-size: 18px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  padding: 8px 0;
+  z-index: 10;
+}
+
+.date-content {
+  display: inline-block;
+  padding-left: 100%;
+  animation: scrollDate 18s linear infinite;
+}
+
+@keyframes scrollDate {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* 🔹 Main Container */
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  width: 96%;
+  max-width: 1300px;
+  margin: 40px auto;
+  flex-wrap: wrap;
+}
+
+/* 🗓️ Calendar Section */
+.calendar-container {
+  background: #fff8e6;
+  border-radius: 18px;
+  padding: 28px;
+  width: 450px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s;
+}
+
+.calendar-container:hover {
+  transform: scale(1.02);
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.calendar-header button {
+  background-color: #7e57c2;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 8px;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.calendar-header button:hover {
+  background-color: #5e35b1;
+  transform: scale(1.05);
+}
+
+.calendar-header h2 {
+  color: #333;
+  font-weight: 700;
+  margin: 0;
+  font-size: 22px;
+}
+
+/* 🗓️ Calendar Grid */
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.calendar div {
+  padding: 14px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+  text-align: center;
+  min-height: 45px;
+  transition: all 0.25s ease;
+  font-size: 16px;
+}
+
+.calendar div:hover {
+  background-color: #d1c4e9;
+}
+
+.calendar .header-day {
+  font-weight: bold;
+  color: #fff;
+  background-color: #3f51b5;
+  border-radius: 8px;
+  cursor: default;
+}
+
+.calendar .today {
+  background-color: #43a047;
+  color: #fff;
+}
+
+/* 🟣 Highlight selected clicked date */
+.selected-day {
+  background-color: #673ab7;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 70%;
+  animation: pop .3s;
+  box-shadow: 0 0 10px rgba(103, 58, 183, 0.6);
+}
+
+/* 🕓 Slots Section */
+.slots-section {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 25px;
+  width: 520px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  min-height: 620px;
+  transition: transform 0.3s ease;
+}
+
+.slots-section:hover {
+  transform: scale(1.02);
+}
+
+/* Slots Container */
+.slots-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-top: 20px;
+}
+
+/* 🎯 Individual Slot Layout */
+.slot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fafafa;
+  border-radius: 14px;
+  padding: 12px 18px;
+  width: 90%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.25s ease;
+}
+
+.slot:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.slot-left {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.slot-label {
+  font-weight: 700;
+  color: #333;
+  font-size: 16px;
+}
+
+.slot-time {
+  font-size: 14px;
+  color: #666;
+}
+
+.slot-result {
+  color: #0b7a18;
+  font-weight: 700;
+  font-size: 22px;
+
+
+
+  letter-spacing: 1px;
+  background: #e8ffe8;
+  padding: 6px 14px;
+  border-radius: 10px;
+  min-width: 110px;
+  text-align: center;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 🔐 Admin Panel */
+#admin-panel {
+  display: none;
+  margin: 30px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  width: 380px;
+  max-width: 95%;
+}
+
+#admin-panel input,
+#admin-panel button {
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+}
+
+#admin-panel button {
+  background: #00c853;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#admin-panel button:hover {
+  background: #009624;
+}
+
+/* ⚫ Footer */
+.footer {
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+  color: white;
+  background: #000;
+  width: 100%;
+  margin-top: 40px;
+  letter-spacing: 0.5px;
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 900px) {
+  .main-container {
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+    gap: 30px;
+  }
+
+  .calendar-container,
+  .slots-section {
+    width: 100%;
+    transform: scale(1);
+    min-height: auto;
+  }
+
+  .slot {
+    width: 100%;
+  }
+
+  .slot-result {
+    min-width: 90px;
+    font-size: 14px;
+  }
+
+  .date-bar {
+    font-size: 16px;
+  }
+}
+
+@keyframes pop {
+
+  0% {
+
+    transform: scale(.7);
+
+  }
+
+  100% {
+
+    transform: scale(1);
+
+  }
+
+}
+
+::-webkit-scrollbar {
+
+  width: 8px;
+
+}
+
+::-webkit-scrollbar-thumb {
+
+  background: #673ab7;
+
+  border-radius: 10px;
+
+}
+
+
+#admin-panel{
+  position:fixed;
+  top:100px;
+  right:20px;
+  width:280px;
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 0 15px rgba(0,0,0,.2);
+  z-index:9999;
+}
+
+#admin-panel input,
+#admin-panel button{
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  border-radius:8px;
+}
+
+#save-result{
+  cursor:pointer;
+}
+
+
+
+/* ---------- ADMIN PAGE ---------- */
+
+.admin-body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  background:linear-gradient(
+    135deg,
+    #0f172a,
+    #1e293b,
+    #334155
+  );
+
+  font-family:Arial, sans-serif;
+}
+
+.admin-card{
+  width:380px;
+  background:white;
+  padding:35px;
+  border-radius:20px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.25);
+
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+.admin-card h1{
+  margin:0;
+  text-align:center;
+  color:#0f172a;
+}
+
+.admin-card p{
+  text-align:center;
+  color:#666;
+  margin-top:-5px;
+  margin-bottom:15px;
+}
+
+.admin-card input{
+  padding:14px;
+  border:2px solid #ddd;
+  border-radius:12px;
+  font-size:16px;
+  outline:none;
+  transition:0.3s;
+}
+
+.admin-card input:focus{
+  border-color:#2563eb;
+}
+
+.admin-card button{
+  padding:14px;
+  border:none;
+  border-radius:12px;
+
+  background:#2563eb;
+  color:white;
+
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+
+  transition:0.3s;
+}
+
+.admin-card button:hover{
+  transform:translateY(-2px);
+  background:#1d4ed8;
+}
