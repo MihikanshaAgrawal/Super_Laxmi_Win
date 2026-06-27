@@ -105,7 +105,13 @@ app.get("/api/results", (req, res) => {
     }
 
     const results = {};
-    const now = new Date();
+    const now = new Date(
+      new Date().toLocaleString("en-US", {
+        timeZone: "Asia/Kolkata"
+      })
+    );
+
+    console.log("SERVER TIME:", now);
 
     // DB ke saved results load karo
     rows.forEach((r) => {
