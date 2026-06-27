@@ -116,8 +116,7 @@ app.get("/api/results", (req, res) => {
 
 
 
-      const startDate = new Date();
-      startDate.setDate(startDate.getDate() - 30);
+      const startDate = new Date(now.getFullYear(), 0, 1);
 
       for (
         let d = new Date(startDate);
