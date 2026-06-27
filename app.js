@@ -114,6 +114,48 @@ app.get("/api/results", (req, res) => {
         results[r.slot_key] = r.number;
       });
 
+
+
+      const startDate = new Date();
+      startDate.setDate(startDate.getDate() - 30);
+
+      for (
+        let d = new Date(startDate);
+        d <= now;
+        d.setDate(d.getDate() + 1)
+      ) {
+        for (let hour = 8; hour < 22; hour++) {
+          for (let min of [0, 20, 40]) {
+
+            const slotTime = new Date(d);
+            slotTime.setHours(hour, min, 0, 0);
+
+            const timeStr = slotTime.toLocaleTimeString("en-US", {
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: true
+            }).toLowerCase();
+
+            const key =
+              `${slotTime.getFullYear()}-${String(slotTime.getMonth() + 1).padStart(2, "0")}-${String(slotTime.getDate()).padStart(2, "0")}_${timeStr}`;
+
+            if (slotTime <= now && !results[key]) {
+              const random = Math.floor(Math.random() * 100)
+                .toString()
+                .padStart(2, "0");
+
+              results[key] = random;
+
+              db.run(
+                "INSERT INTO results(slot_key, number, is_locked) VALUES (?, ?, ?)",
+                [key, random, 1]
+              );
+            }
+          }
+        }
+      }
+
+
       rows.forEach(r => {
         const [datePart, timePart] = r.slot_key.split("_");
 
@@ -145,39 +187,7 @@ app.get("/api/results", (req, res) => {
         }
       });
 
-      for (let hour = 8; hour < 22; hour++) {
-        for (let min of [0, 20, 40]) {
 
-          const slotTime = new Date();
-          slotTime.setHours(hour, min, 0, 0);
-
-          const timeStr = slotTime.toLocaleTimeString("en-US", {
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: true
-          }).toLowerCase();
-
-
-
-          const key =
-            `${slotTime.getFullYear()}-${String(slotTime.getMonth() + 1).padStart(2, "0")}-${String(slotTime.getDate()).padStart(2, "0")}_${timeStr}`;
-
-          // Agar time nikal gaya aur result nahi hai
-          if (slotTime <= now && !results[key]) {
-
-            const random = Math.floor(Math.random() * 100)
-              .toString()
-              .padStart(2, "0");
-
-            results[key] = random;
-
-            db.run(
-              "INSERT INTO results(slot_key, number, is_locked) VALUES (?, ?, ?)",
-              [key, random, 1]
-            );
-          }
-        }
-      }
 
       res.json(results);
     }
