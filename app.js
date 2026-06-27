@@ -99,98 +99,58 @@ app.post("/api/save-result", (req, res) => {
 // GET ALL RESULTS
 // ======================
 app.get("/api/results", (req, res) => {
-  db.all(
-    "SELECT * FROM results",
-    [],
-    (err, rows) => {
-      if (err) {
-        return res.status(500).json({});
-      }
+  db.all("SELECT * FROM results", [], (err, rows) => {
+    if (err) {
+      return res.status(500).json({});
+    }
 
-      const results = {};
-      const now = new Date();
+    const results = {};
+    const now = new Date();
 
-      rows.forEach(r => {
-        results[r.slot_key] = r.number;
-      });
+    // DB ke saved results load karo
+    rows.forEach((r) => {
+      results[r.slot_key] = r.number;
+    });
 
+    // Aaj ke saare past slots ke random numbers generate karo
+    for (let hour = 8; hour < 22; hour++) {
+      for (let min of [0, 20, 40]) {
+        const slotTime = new Date(now);
+        slotTime.setHours(hour, min, 0, 0);
 
-
-
-
-      for (let hour = 8; hour < 22; hour++) {
-        for (let min of [0, 20, 40]) {
-
-          const slotTime = new Date(now);
-          slotTime.setHours(hour, min, 0, 0);
-
-          const key =
-            `${slotTime.getFullYear()}-${String(slotTime.getMonth() + 1).padStart(2, "0")}-${String(slotTime.getDate()).padStart(2, "0")}_` +
-            slotTime.toLocaleTimeString("en-US", {
+        const key =
+          `${slotTime.getFullYear()}-${String(
+            slotTime.getMonth() + 1
+          ).padStart(2, "0")}-${String(
+            slotTime.getDate()
+          ).padStart(2, "0")}_` +
+          slotTime
+            .toLocaleTimeString("en-US", {
               hour: "2-digit",
               minute: "2-digit",
-              hour12: true
-            }).toLowerCase();
+              hour12: true,
+            })
+            .toLowerCase();
 
-          if (slotTime.getTime() <= now.getTime() && !results[key]) {
+        // Agar slot past hai aur result nahi hai
+        if (slotTime.getTime() <= now.getTime() && !results[key]) {
+          const random = String(
+            Math.floor(Math.random() * 100)
+          ).padStart(2, "0");
 
-            const random = String(
-              Math.floor(Math.random() * 100)
-            ).padStart(2, "0");
+          results[key] = random;
 
-            results[key] = random;
-
-            db.run(
-              "INSERT OR REPLACE INTO results(slot_key, number, is_locked) VALUES (?, ?, ?)",
-              [key, random, 1]
-            );
-          }
-        }
-      }
-
-
-
-      rows.forEach(r => {
-        const [datePart, timePart] = r.slot_key.split("_");
-
-        const [year, month, day] = datePart.split("-");
-
-        let [time, ampm] = timePart.split(" ");
-        let [hour, minute] = time.split(":");
-
-        hour = parseInt(hour);
-        minute = parseInt(minute);
-
-        if (ampm === "pm" && hour !== 12) hour += 12;
-        if (ampm === "am" && hour === 12) hour = 0;
-
-        const slotDate = new Date(
-          year,
-          month - 1,
-          day,
-          hour,
-          minute,
-          0
-        );
-
-        if (slotDate <= now && r.is_locked === 0) {
           db.run(
-            "UPDATE results SET is_locked = 1 WHERE slot_key = ?",
-            [r.slot_key]
+            "INSERT OR REPLACE INTO results(slot_key, number, is_locked) VALUES (?, ?, 1)",
+            [key, random]
           );
         }
-      });
-
-
-
-
-
-
-      res.json(results);
+      }
     }
-  );
-});
 
+    res.json(results);
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
