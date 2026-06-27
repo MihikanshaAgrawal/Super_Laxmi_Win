@@ -122,41 +122,36 @@ app.get("/api/results", (req, res) => {
         now.getDate()
       );
 
-      for (
-        let d = new Date(startDate);
-        d <= now;
-        d.setDate(d.getDate() + 1)
-      ) {
         for (let hour = 8; hour < 22; hour++) {
-          for (let min of [0, 20, 40]) {
+  for (let min of [0, 20, 40]) {
 
-            const slotTime = new Date(d);
-            slotTime.setHours(hour, min, 0, 0);
+    const slotTime = new Date(now);
+    slotTime.setHours(hour, min, 0, 0);
 
-            const timeStr = slotTime.toLocaleTimeString("en-US", {
-              hour: "2-digit",
-              minute: "2-digit",
-              hour12: true
-            }).toLowerCase();
+    const key =
+      `${slotTime.getFullYear()}-${String(slotTime.getMonth() + 1).padStart(2, "0")}-${String(slotTime.getDate()).padStart(2, "0")}_` +
+      slotTime.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true
+      }).toLowerCase();
 
-            const key =
-              `${slotTime.getFullYear()}-${String(slotTime.getMonth() + 1).padStart(2, "0")}-${String(slotTime.getDate()).padStart(2, "0")}_${timeStr}`;
+    if (slotTime.getTime() <= now.getTime() && !results[key]) {
 
-            if (slotTime <= now && !results[key]) {
-              const random = Math.floor(Math.random() * 100)
-                .toString()
-                .padStart(2, "0");
+      const random = String(
+        Math.floor(Math.random() * 100)
+      ).padStart(2, "0");
 
-              results[key] = random;
+      results[key] = random;
 
-              db.run(
-                "INSERT INTO results(slot_key, number, is_locked) VALUES (?, ?, ?)",
-                [key, random, 1]
-              );
-            }
-          }
-        }
-      }
+      db.run(
+        "INSERT OR REPLACE INTO results(slot_key, number, is_locked) VALUES (?, ?, ?)",
+        [key, random, 1]
+      );
+    }
+  }
+}
+      
 
 
       rows.forEach(r => {
@@ -207,6 +202,12 @@ app.get("/api/results", (req, res) => {
           const key =
             `${slotTime.getFullYear()}-${String(slotTime.getMonth() + 1).padStart(2, "0")}-${String(slotTime.getDate()).padStart(2, "0")}_${timeStr}`;
 
+          console.log(
+            key,
+            slotTime.toLocaleTimeString(),
+            now.toLocaleTimeString()
+          );
+
           if (slotTime <= now && !results[key]) {
 
             const random = Math.floor(Math.random() * 100)
@@ -218,8 +219,12 @@ app.get("/api/results", (req, res) => {
             results[key] = random;
 
             db.run(
-              "INSERT OR REPLACE INTO results(slot_key, number, is_locked) VALUES (?, ?, ?)",
-              [key, random, 1]
+              "INSERT OR IGNORE INTO results(slot_key, number, is_locked) VALUES (?, ?, ?)",
+              [key, random, 1],
+              function (err) {
+                if (err) console.log(err);
+                else console.log("Inserted:", key);
+              }
             );
           }
         }
