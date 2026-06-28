@@ -59,7 +59,7 @@ for (let y = 2000; y <= 2035; y++) {
   yearSelect.appendChild(option);
 }
 
-renderCalendar(currentDate);
+
 
 monthSelect.value = currentDate.getMonth();
 yearSelect.value = currentDate.getFullYear();
@@ -114,36 +114,50 @@ function renderCalendar(date) {
 
   const today = getTodayIST();
 
-  // Calendar day cells
   for (let i = 1; i <= daysInMonth; i++) {
-    const dayDiv = document.createElement("div");
-    const dateObj = new Date(year, month, i);
-    dayDiv.textContent = i;
+  const dayDiv = document.createElement("div");
+  const dateObj = new Date(year, month, i);
 
-    // Mark today's date
-    if (
-      dateObj.getDate() === today.getDate() &&
-      dateObj.getMonth() === today.getMonth() &&
-      dateObj.getFullYear() === today.getFullYear()
-    ) {
-      dayDiv.classList.add("today");
-    }
+  dayDiv.textContent = i;
 
-    // Handle date click
-    dayDiv.addEventListener("click", () => {
-      generateSlots(dateObj);
+  if (
+    dateObj.getDate() === today.getDate() &&
+    dateObj.getMonth() === today.getMonth() &&
+    dateObj.getFullYear() === today.getFullYear()
+  ) {
+    dayDiv.classList.add("today");
+  }
 
-      // Remove previous selection highlight
+  dayDiv.addEventListener("click", () => {
+    generateSlots(dateObj);
 
-      if (selectedDayDiv) selectedDayDiv.classList.remove("selected-day");
-      dayDiv.classList.add("selected-day");
-      selectedDayDiv = dayDiv;
-    });
+    if (selectedDayDiv)
+      selectedDayDiv.classList.remove("selected-day");
 
-    calendar.appendChild(dayDiv);
+    dayDiv.classList.add("selected-day");
+    selectedDayDiv = dayDiv;
+  });
+
+  calendar.appendChild(dayDiv);
+}
+
+if (
+  year === today.getFullYear() &&
+  month === today.getMonth()
+) {
+  const todayDiv = [...calendar.children].find(
+    el => el.textContent == today.getDate()
+  );
+
+  if (todayDiv) {
+    todayDiv.classList.add("selected-day");
+    selectedDayDiv = todayDiv;
   }
 }
 
+
+
+}
 // ------------------ 🕓 Slot Generation ------------------
 function formatKey(dateObj, slotDate) {
   const date =
@@ -235,11 +249,8 @@ async function loadResults() {
   }
 }
 loadResults().then(() => {
-
-  generateSlots(today);
-
   renderCalendar(today);
-
+  generateSlots(today);
 });
 // Refresh every minute to show new slot results
 setInterval(() => {
@@ -249,6 +260,7 @@ setInterval(() => {
     generateSlots(current);
   }
 }, 60000);
+  
 
 
 
@@ -274,15 +286,3 @@ setInterval(async () => {
 }, 5000);
 
 
-function formatKey(dateObj, slotDate) {
-  const date =
-    `${dateObj.getFullYear()}-${String(dateObj.getMonth() + 1).padStart(2, "0")}-${String(dateObj.getDate()).padStart(2, "0")}`;
-
-  const time = slotDate.toLocaleTimeString("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true
-  }).toLowerCase();
-
-  return `${date}_${time}`;
-}
