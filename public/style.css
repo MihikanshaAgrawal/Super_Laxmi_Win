@@ -286,6 +286,38 @@ body {
   background: #009624;
 }
 
+
+.notice-box {
+  width: 100%;
+  overflow: hidden;
+  margin: 20px 0;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.ticker {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ticker span {
+  display: inline-block;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  animation: tickerMove 15s linear infinite;
+}
+
+@keyframes tickerMove {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+
 /* ⚫ Footer */
 .footer {
   text-align: center;
@@ -515,19 +547,3 @@ body {
 
 
 
-/* Bottom welcome line visible */
-marquee {
-  color: #ffffff !important;
-  font-size: 18px !important;
-  font-weight: 600 !important;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
-  padding: 15px 0;
-  display: block;
-}
-
-/* Footer text */
-.footer,
-footer,
-.footer p {
-  color: #ffffff !important;
-}
