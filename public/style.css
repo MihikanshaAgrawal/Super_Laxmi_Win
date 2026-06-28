@@ -69,13 +69,12 @@ body {
 
 /* 🗓️ Calendar Section */
 .calendar-container {
-  background: #fff8e6;
-  border-radius: 18px;
-  padding: 28px;
-  width: 450px;
-  text-align: center;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s;
+  background: #f6f1e3;
+  border-radius: 22px;
+  padding: 30px;
+  width: 500px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+  transition: 0.3s;
 }
 
 .calendar-container:hover {
@@ -86,22 +85,40 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 30px;
+}
+
+
+.month-picker {
+  display: flex;
+  gap: 12px;
+}
+
+.month-picker select {
+  padding: 10px 18px;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 600;
+  background: white;
+  cursor: pointer;
 }
 
 .calendar-header button {
-  background-color: #7e57c2;
+  width: 50px;
+  height: 50px;
   border: none;
-  padding: 6px 12px;
+  border-radius: 12px;
+  background: #7e57c2;
+  color: white;
+  font-size: 20px;
   cursor: pointer;
-  font-size: 18px;
-  border-radius: 8px;
-  color: #fff;
-  transition: all 0.3s ease;
+  transition: 0.3s;
 }
 
 .calendar-header button:hover {
-  background-color: #5e35b1;
-  transform: scale(1.05);
+  background: #5e35b1;
+  transform: scale(1.08);
 }
 
 .calendar-header h2 {
@@ -115,23 +132,18 @@ body {
 .calendar {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
-  margin-top: 20px;
+  gap: 12px;
 }
 
 .calendar div {
-  padding: 14px 0;
-  border-radius: 10px;
-  cursor: pointer;
+  height: 50px;
+  border-radius: 12px;
   display: flex;
-
-  align-items: center;
-
   justify-content: center;
-  text-align: center;
-  min-height: 45px;
-  transition: all 0.25s ease;
-  font-size: 16px;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 17px;
 }
 
 .calendar div:hover {
@@ -153,12 +165,11 @@ body {
 
 /* 🟣 Highlight selected clicked date */
 .selected-day {
-  background-color: #673ab7;
-  color: #fff;
-  font-weight: 700;
-  border-radius: 70%;
-  animation: pop .3s;
-  box-shadow: 0 0 10px rgba(103, 58, 183, 0.6);
+  background: #673ab7;
+  color: white;
+  border-radius: 50%;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(103,58,183,.4);
 }
 
 /* 🕓 Slots Section */
@@ -283,12 +294,20 @@ body {
 
 /* 📱 Responsive Design */
 @media (max-width: 900px) {
-  .main-container {
-    flex-direction: column;
-    align-items: center;
-    width: 95%;
-    gap: 30px;
+  .calendar-container,
+  .slots-section {
+    width: 100%;
   }
+
+  .month-picker {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .month-picker select {
+    width: 100%;
+  }
+}
 
   .calendar-container,
   .slots-section {
@@ -309,7 +328,7 @@ body {
   .date-bar {
     font-size: 16px;
   }
-}
+
 
 @keyframes pop {
 
