@@ -38,8 +38,13 @@ app.post("/api/save-result", (req, res) => {
     0
   );
 
-  // ❌ Past slot => no edit
-  if (slotTime.getTime() <= now.getTime() && !results[key]) {
+  const now = new Date(
+    new Date().toLocaleString("en-US", {
+      timeZone: "Asia/Kolkata"
+    })
+  );
+
+  if (slotDateTime.getTime() <= now.getTime()) {
     return res.json({
       success: false,
       message: "Slot already passed"
