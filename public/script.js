@@ -5,7 +5,6 @@ setInterval(() => {
   // next slot countdown
 
 }, 1000);
-
 const monthSelect = document.getElementById("monthSelect");
 const yearSelect = document.getElementById("yearSelect");
 const calendar = document.getElementById("calendar");
@@ -35,7 +34,6 @@ setInterval(() => {
 // ------------------ 🗓️ Calendar Rendering ------------------
 let currentDate = getTodayIST();
 renderCalendar(currentDate);
-
 
 const months = [
   "January", "February", "March", "April",
@@ -71,12 +69,12 @@ yearSelect.addEventListener("change", () => {
 });
 
 
-document.getElementById("prevMonth").addEventListener("click", () => {
+document.getElementById("prevBtn").addEventListener("click", () => {
   currentDate.setMonth(currentDate.getMonth() - 1);
   renderCalendar(currentDate);
 });
 
-document.getElementById("nextMonth").addEventListener("click", () => {
+document.getElementById("nextBtn").addEventListener("click", () => {
   currentDate.setMonth(currentDate.getMonth() + 1);
   renderCalendar(currentDate);
 });
@@ -84,9 +82,9 @@ document.getElementById("nextMonth").addEventListener("click", () => {
 function renderCalendar(date) {
   const year = date.getFullYear();
   const month = date.getMonth();
- 
-  monthSelect.value = month;
-  yearSelect.value = year;
+
+  const year = date.getFullYear();
+  const month = date.getMonth();
   calendar.innerHTML = "";
 
   const firstDay = new Date(year, month, 1).getDay();
