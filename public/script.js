@@ -5,7 +5,9 @@ setInterval(() => {
   // next slot countdown
 
 }, 1000);
-const monthYear = document.getElementById("monthYear");
+
+const monthSelect = document.getElementById("monthSelect");
+const yearSelect = document.getElementById("yearSelect");
 const calendar = document.getElementById("calendar");
 const selectedDateTitle = document.getElementById("selectedDateTitle");
 const slotsContainer = document.getElementById("slotsContainer");
@@ -34,6 +36,41 @@ setInterval(() => {
 let currentDate = getTodayIST();
 renderCalendar(currentDate);
 
+
+const months = [
+  "January", "February", "March", "April",
+  "May", "June", "July", "August",
+  "September", "October", "November", "December"
+];
+
+months.forEach((m, i) => {
+  const option = document.createElement("option");
+  option.value = i;
+  option.textContent = m;
+  monthSelect.appendChild(option);
+});
+
+for (let y = 2000; y <= 2035; y++) {
+  const option = document.createElement("option");
+  option.value = y;
+  option.textContent = y;
+  yearSelect.appendChild(option);
+}
+
+monthSelect.value = currentDate.getMonth();
+yearSelect.value = currentDate.getFullYear();
+
+monthSelect.addEventListener("change", () => {
+  currentDate.setMonth(parseInt(monthSelect.value));
+  renderCalendar(currentDate);
+});
+
+yearSelect.addEventListener("change", () => {
+  currentDate.setFullYear(parseInt(yearSelect.value));
+  renderCalendar(currentDate);
+});
+
+
 document.getElementById("prevMonth").addEventListener("click", () => {
   currentDate.setMonth(currentDate.getMonth() - 1);
   renderCalendar(currentDate);
@@ -47,7 +84,9 @@ document.getElementById("nextMonth").addEventListener("click", () => {
 function renderCalendar(date) {
   const year = date.getFullYear();
   const month = date.getMonth();
-  monthYear.textContent = `${date.toLocaleString("default", { month: "long" })} ${year}`;
+ 
+  monthSelect.value = month;
+  yearSelect.value = year;
   calendar.innerHTML = "";
 
   const firstDay = new Date(year, month, 1).getDay();
@@ -139,7 +178,7 @@ function generateSlots(dateObj) {
 
     const key = formatKey(dateObj, start);
 
-    
+
     console.log("KEY =", key);
     console.log("RESULT =", storedResults[key]);
 

@@ -366,7 +366,13 @@ body {
   cursor:pointer;
 }
 
-
+#monthSelect,
+#yearSelect {
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 16px;
+  margin: 0 5px;
+}
 
 /* ---------- ADMIN PAGE ---------- */
 
