@@ -36,25 +36,8 @@ setInterval(() => {
 let currentDate = getTodayIST();
 renderCalendar(currentDate);
 
-const months = [
-  "January", "February", "March", "April",
-  "May", "June", "July", "August",
-  "September", "October", "November", "December"
-];
 
-months.forEach((m, i) => {
-  const option = document.createElement("option");
-  option.value = i;
-  option.textContent = m;
-  monthSelect.appendChild(option);
-});
 
-for (let y = 2000; y <= 2050; y++) {
-  const option = document.createElement("option");
-  option.value = y;
-  option.textContent = y;
-  yearSelect.appendChild(option);
-}
 
 const months = [
   "January", "February", "March", "April",
@@ -101,10 +84,12 @@ document.getElementById("nextBtn").addEventListener("click", () => {
 });
 
 function renderCalendar(date) {
+  monthSelect.value = month;
+  yearSelect.value = year;
   const year = date.getFullYear();
   const month = date.getMonth();
 
- 
+
   calendar.innerHTML = "";
 
   const firstDay = new Date(year, month, 1).getDay();
