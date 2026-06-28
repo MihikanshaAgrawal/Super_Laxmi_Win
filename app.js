@@ -124,7 +124,7 @@ app.get("/api/results", (req, res) => {
     });
 
     const juneStart = new Date(2026, 5, 1); // 1 June 2026
-    const now = new Date();
+    
 
     for (
       let d = new Date(juneStart);
