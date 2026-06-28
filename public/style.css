@@ -157,20 +157,24 @@ body {
   cursor: default;
 }
 
+/* Aaj ki date */
 .calendar .today {
-  background-color: #43a047;
-  color: #fff;
+  background: #ffe9a8;
+  color: #333;
+  border: 2px solid #f4c542;
+  border-radius: 14px;
+  font-weight: 700;
 }
 
-/* 🟣 Highlight selected clicked date */
+/* User ne jo date select ki */
 .selected-day {
-  background: #673ab7;
-  color: white;
-  border-radius: 50%;
-  font-weight: bold;
-  box-shadow: 0 0 15px rgba(103,58,183,.4);
+  background: #e8ddff;
+  color: #5b21b6;
+  border: 2px solid #8b5cf6;
+  border-radius: 14px;
+  font-weight: 700;
+  box-shadow: none;
 }
-
 /* 🕓 Slots Section */
 
 .slots-section {
