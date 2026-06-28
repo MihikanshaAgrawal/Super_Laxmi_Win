@@ -60,22 +60,21 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 40px;
-  width: 96%;
-  max-width: 1300px;
+  gap: 35px;
+  width: 95%;
+  max-width: 1400px;
   margin: 40px auto;
-  flex-wrap: wrap;
 }
 
 /* 🗓️ Calendar Section */
-.calendar-container {
-  background: #f6f1e3;
-  border-radius: 22px;
-  padding: 30px;
-  width: 500px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.18);
-  transition: 0.3s;
+.calendar-container,
+.slots-section {
+  background: #fff;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
 }
+
 
 .calendar-container:hover {
   transform: scale(1.02);
@@ -173,15 +172,10 @@ body {
 }
 
 /* 🕓 Slots Section */
+
 .slots-section {
-  background: #ffffff;
-  border-radius: 18px;
-  padding: 25px;
-  width: 520px;
-  text-align: center;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  width: 550px;
   min-height: 620px;
-  transition: transform 0.3s ease;
 }
 
 .slots-section:hover {
@@ -293,25 +287,16 @@ body {
 }
 
 /* 📱 Responsive Design */
-@media (max-width: 900px) {
-  .calendar-container,
-  .slots-section {
-    width: 100%;
-  }
-
-  .month-picker {
+@media (max-width: 1000px) {
+  .main-container {
     flex-direction: column;
-    gap: 8px;
+    align-items: center;
   }
-
-  .month-picker select {
-    width: 100%;
-  }
-}
 
   .calendar-container,
   .slots-section {
     width: 100%;
+    max-width: 600px;
     transform: scale(1);
     min-height: auto;
   }
@@ -328,7 +313,7 @@ body {
   .date-bar {
     font-size: 16px;
   }
-
+}
 
 @keyframes pop {
 
