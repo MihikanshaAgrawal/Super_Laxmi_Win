@@ -123,6 +123,44 @@ app.get("/api/results", (req, res) => {
       results[r.slot_key] = r.number;
     });
 
+    const juneStart = new Date(2026, 5, 1); // 1 June 2026
+    const now = new Date();
+
+    for (
+      let d = new Date(juneStart);
+      d <= now;
+      d.setDate(d.getDate() + 1)
+    ) {
+      for (let hour = 8; hour < 22; hour++) {
+        for (let min of [0, 20, 40]) {
+
+          const slotTime = new Date(d);
+          slotTime.setHours(hour, min, 0, 0);
+
+          const hours = slotTime.getHours();
+          const minutes = String(slotTime.getMinutes()).padStart(2, "0");
+          const h12 = hours % 12 || 12;
+          const ampm = hours >= 12 ? "pm" : "am";
+
+          const key =
+            `${slotTime.getFullYear()}-${String(slotTime.getMonth() + 1).padStart(2, "0")}-${String(slotTime.getDate()).padStart(2, "0")}_${String(h12).padStart(2, "0")}:${minutes} ${ampm}`;
+
+          if (!results[key]) {
+            const random = String(
+              Math.floor(Math.random() * 100)
+            ).padStart(2, "0");
+
+            results[key] = random;
+
+            db.run(
+              "INSERT OR IGNORE INTO results(slot_key, number, is_locked) VALUES (?, ?, 1)",
+              [key, random]
+            );
+          }
+        }
+      }
+    }
+
     // Aaj ke saare past slots ke random numbers generate karo
     for (let hour = 8; hour < 22; hour++) {
       for (let min of [0, 20, 40]) {
