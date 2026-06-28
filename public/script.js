@@ -5,8 +5,7 @@ setInterval(() => {
   // next slot countdown
 
 }, 1000);
-const monthSelect = document.getElementById("monthSelect");
-const yearSelect = document.getElementById("yearSelect");
+
 const calendar = document.getElementById("calendar");
 const selectedDateTitle = document.getElementById("selectedDateTitle");
 const slotsContainer = document.getElementById("slotsContainer");
@@ -83,8 +82,7 @@ function renderCalendar(date) {
   const year = date.getFullYear();
   const month = date.getMonth();
 
-  const year = date.getFullYear();
-  const month = date.getMonth();
+ 
   calendar.innerHTML = "";
 
   const firstDay = new Date(year, month, 1).getDay();
