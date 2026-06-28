@@ -34,7 +34,7 @@ setInterval(() => {
 
 // ------------------ 🗓️ Calendar Rendering ------------------
 let currentDate = getTodayIST();
-renderCalendar(currentDate);
+
 
 
 
@@ -59,6 +59,8 @@ for (let y = 2000; y <= 2035; y++) {
   yearSelect.appendChild(option);
 }
 
+renderCalendar(currentDate);
+
 monthSelect.value = currentDate.getMonth();
 yearSelect.value = currentDate.getFullYear();
 
@@ -73,22 +75,22 @@ yearSelect.addEventListener("change", () => {
 });
 
 
-document.getElementById("prevBtn").addEventListener("click", () => {
+document.getElementById("prevMonth").addEventListener("click", () => {
   currentDate.setMonth(currentDate.getMonth() - 1);
   renderCalendar(currentDate);
 });
 
-document.getElementById("nextBtn").addEventListener("click", () => {
+document.getElementById("nextMonth").addEventListener("click", () => {
   currentDate.setMonth(currentDate.getMonth() + 1);
   renderCalendar(currentDate);
 });
 
 function renderCalendar(date) {
-  monthSelect.value = month;
-  yearSelect.value = year;
   const year = date.getFullYear();
   const month = date.getMonth();
 
+  monthSelect.value = month;
+  yearSelect.value = year;
 
   calendar.innerHTML = "";
 
