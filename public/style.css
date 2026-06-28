@@ -175,6 +175,14 @@ body {
   font-weight: 700;
   box-shadow: none;
 }
+
+.calendar .today.selected-day {
+  background: #d6c5ff;
+  color: #4c1d95;
+  border: 2px solid #7c3aed;
+}
+
+
 /* 🕓 Slots Section */
 
 .slots-section {
@@ -503,4 +511,23 @@ body {
   transform:translateY(-50%);
   cursor:pointer;
   font-size:20px;
+}
+
+
+
+/* Bottom welcome line visible */
+marquee {
+  color: #ffffff !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+  padding: 15px 0;
+  display: block;
+}
+
+/* Footer text */
+.footer,
+footer,
+.footer p {
+  color: #ffffff !important;
 }
