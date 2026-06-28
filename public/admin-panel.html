@@ -1,40 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Panel</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="admin-body">
 
-  <!-- <h1 style="color:red">ADMIN TEST PAGE</h1> -->
-  <h1 style="color:red">ADMIN PAGE WORKING</h1>
+  <div id="login-box" class="login-box">
+    <h2>🔐 Admin Login</h2>
 
-  <div class="admin-card">
-    <h1>🔐 Admin Panel</h1>
-    <p>Manage Slot Results</p>
+    <div class="password-wrapper">
+      <input type="password" id="admin-password" placeholder="Enter Admin Password">
+      <span id="toggle-pass">👁️</span>
+    </div>
 
-    <input type="date" id="admin-date">
+    <button id="login-btn">Login</button>
+  </div>
 
-    <!-- 12-hour slot dropdown -->
-    <select id="admin-time">
-    </select>
+  <div id="admin-content" style="display:none;">
 
-    <input
-      type="number"
-      id="admin-number"
-      min="0"
-      max="99"
-      placeholder="Enter Result (00-99)"
-    >
+    <!-- <h1 style="color:red">ADMIN TEST PAGE</h1> -->
+    <h1 style="color:red">ADMIN PAGE WORKING</h1>
 
-    <button id="save-result">
-      💾 Save Result
-    </button>
+    <div class="admin-card">
+      <h1>🔐 Admin Panel</h1>
+      <p>Manage Slot Results</p>
+
+      <input type="date" id="admin-date">
+
+      <!-- 12-hour slot dropdown -->
+      <select id="admin-time">
+      </select>
+
+      <input type="number" id="admin-number" min="0" max="99" placeholder="Enter Result (00-99)">
+
+      <button id="save-result">
+        💾 Save Result
+      </button>
+    </div>
+
   </div>
 
   <script src="admin.js"></script>
 
 </body>
+
 </html>
+

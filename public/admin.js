@@ -1,13 +1,25 @@
-const pass = prompt("Enter Admin Password");
+const loginBtn = document.getElementById("login-btn");
+const passwordInput = document.getElementById("admin-password");
+const togglePass = document.getElementById("toggle-pass");
 
-if (pass === null) {
-  window.location.href = "/";
-}
+togglePass.addEventListener("click", () => {
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    togglePass.textContent = "🙈";
+  } else {
+    passwordInput.type = "password";
+    togglePass.textContent = "👁️";
+  }
+});
 
-if (pass.trim() !== "narayan@2026") {
-  document.body.innerHTML = "<h2>❌ Access Denied</h2>";
-  throw new Error("Access Denied");
-}
+loginBtn.addEventListener("click", () => {
+  if (passwordInput.value.trim() === "narayan@2026") {
+    document.getElementById("login-box").style.display = "none";
+    document.getElementById("admin-content").style.display = "block";
+  } else {
+    alert("❌ Wrong Password");
+  }
+});
 
 // ==========================
 // Populate 12-hour time slots
